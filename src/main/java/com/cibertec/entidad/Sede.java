@@ -33,7 +33,7 @@ public class Sede {
 	private int estado;
 
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "America/Lima")
 	private Date fechaCreacion;
 	
 	@Temporal(TemporalType.TIMESTAMP)

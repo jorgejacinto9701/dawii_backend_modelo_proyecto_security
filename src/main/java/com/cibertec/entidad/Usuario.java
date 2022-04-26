@@ -18,13 +18,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "usuario")
-@ToString
 public class Usuario {
 
 	@Id
@@ -43,7 +41,7 @@ public class Usuario {
 	private String direccion;
 	
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" , timezone = "America/Lima")
 	private Date fechaNacimiento;
 	
 	private int estado;
@@ -56,6 +54,4 @@ public class Usuario {
 	public String getNombreCompleto() {
 		return nombres.concat(" ").concat(apellidos);
 	}
-	
-	
 }
