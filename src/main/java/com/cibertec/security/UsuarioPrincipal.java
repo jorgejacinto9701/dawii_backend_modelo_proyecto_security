@@ -81,5 +81,9 @@ public class UsuarioPrincipal implements UserDetails {
 	public String getNombreCompleto() {
 		return nombreCompleto;
 	}
+	
+	public int getIdUsuario() {
+		return idUsuario;
+	}
 
 }
