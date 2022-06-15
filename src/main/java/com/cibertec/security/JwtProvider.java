@@ -24,6 +24,7 @@ public class JwtProvider {
     private int expiration = 36000;
 
     public String generateToken(Authentication authentication){
+    	logger.info(">>> generateToken" );
         UsuarioPrincipal usuarioPrincipal = (UsuarioPrincipal) authentication.getPrincipal();
         return Jwts.builder().setSubject(usuarioPrincipal.getUsername())
                 .setIssuedAt(new Date())
@@ -41,15 +42,15 @@ public class JwtProvider {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
             return true;
         }catch (MalformedJwtException e){
-            logger.error("token mal formado");
+            logger.error(">>> validateToken >>> token mal formado");
         }catch (UnsupportedJwtException e){
-            logger.error("token no soportado");
+            logger.error(">>> validateToken >>> token no soportado");
         }catch (ExpiredJwtException e){
-            logger.error("token expirado");
+            logger.error(">>> validateToken >>> token expirado");
         }catch (IllegalArgumentException e){
-            logger.error("token vacío");
+            logger.error(">>> validateToken >>> token vacío");
         }catch (SignatureException e){
-            logger.error("fail en la firma");
+            logger.error(">>> validateToken >>> fail en la firma");
         }
         return false;
     }
