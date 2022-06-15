@@ -27,8 +27,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 	UserDetailsService userDetailsService;
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
-		logger.info(">>> doFilterInternal" );
+	protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain)
+			throws ServletException, IOException {
+		logger.error(">>> Ingreso doFilterInternal");
 		try {
 			String token = getToken(req);
 			logger.info(">>> doFilterInternal >> token >> "  + token);
