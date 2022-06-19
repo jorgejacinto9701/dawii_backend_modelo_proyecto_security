@@ -32,12 +32,20 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 		logger.error(">>> Ingreso doFilterInternal");
 		try {
 			String token = getToken(req);
+<<<<<<< HEAD
 			logger.error(">>> Llegó token ==> " + token);
 			
+=======
+			logger.info(">>> doFilterInternal >> token >> "  + token);
+>>>>>>> branch 'master' of https://github.com/jorgejacinto9701/dawii_backend_modelo_proyecto_security.git
 			if (token != null && jwtProvider.validateToken(token)) {
 				String nombreUsuario = jwtProvider.getNombreUsuarioFromToken(token);
+<<<<<<< HEAD
 				logger.error(">>> Llegó Usuario ==> " + nombreUsuario);
 				
+=======
+				logger.info(">>> doFilterInternal >> nombreUsuario >> "  + nombreUsuario);
+>>>>>>> branch 'master' of https://github.com/jorgejacinto9701/dawii_backend_modelo_proyecto_security.git
 				UserDetails userDetails = userDetailsService.loadUserByUsername(nombreUsuario);
 
 				UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
