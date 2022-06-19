@@ -36,6 +36,8 @@ public class AuthController {
     	log.info(">>> login >>> " + loginUsuario.getPassword());
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getLogin(), loginUsuario.getPassword()));
         
+        log.info(">>> authentication >>> " + authentication);
+        log.info(">>> Inicio de Generacion de Token ");
         //Generacion del Token
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtProvider.generateToken(authentication);
@@ -45,7 +47,7 @@ public class AuthController {
         UsuarioPrincipal usuario = (UsuarioPrincipal)authentication.getPrincipal();
         log.info(">>> usuario >>> " + usuario.toString());
         
-        JwtDto jwtDto = new JwtDto(jwt,  usuario.getUsername(),usuario.getNombreCompleto(), usuario.getIdUsuario(), usuario.getAuthorities());
+        JwtDto jwtDto = new JwtDto(jwt,  usuario.getUsername(),usuario.getNombreCompleto(), usuario.getIdUsuario(), usuario.getAuthorities(), usuario.getOpciones());
         log.info(">>> jwtDto >>> " + jwtDto.toString());
         
         return new ResponseEntity<JwtDto>(jwtDto, HttpStatus.OK);

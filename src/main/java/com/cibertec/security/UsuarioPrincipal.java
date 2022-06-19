@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.cibertec.entidad.Opcion;
 import com.cibertec.entidad.Rol;
 import com.cibertec.entidad.Usuario;
 
@@ -31,15 +32,16 @@ public class UsuarioPrincipal implements UserDetails {
 	private String nombreUsuario;
 	private static String nombreCompleto;
 	private Collection<? extends GrantedAuthority> authorities;
-
-	public static UsuarioPrincipal build(Usuario usuario, List<Rol> roles) {
+	private List<Opcion> opciones;
+	
+	public static UsuarioPrincipal build(Usuario usuario, List<Rol> roles, List<Opcion> opciones) {
 		log.info(">>>UsuarioPrincipal >> " + usuario);
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		for (Rol x : roles) {
 			authorities.add(new SimpleGrantedAuthority(x.getNombre()));
 		}
 		nombreCompleto = usuario.getNombreCompleto();
-		return new UsuarioPrincipal(usuario.getIdUsuario(), usuario.getLogin(), usuario.getPassword(), usuario.getNombreCompleto(), authorities);
+		return new UsuarioPrincipal(usuario.getIdUsuario(), usuario.getLogin(), usuario.getPassword(), usuario.getNombreCompleto(), authorities, opciones);
 	}
 
 	@Override

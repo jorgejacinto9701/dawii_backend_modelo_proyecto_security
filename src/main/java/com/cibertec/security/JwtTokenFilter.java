@@ -32,8 +32,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 		logger.error(">>> Ingreso doFilterInternal");
 		try {
 			String token = getToken(req);
+			logger.error(">>> Llegó token ==> " + token);
+			
 			if (token != null && jwtProvider.validateToken(token)) {
 				String nombreUsuario = jwtProvider.getNombreUsuarioFromToken(token);
+				logger.error(">>> Llegó Usuario ==> " + nombreUsuario);
+				
 				UserDetails userDetails = userDetailsService.loadUserByUsername(nombreUsuario);
 
 				UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

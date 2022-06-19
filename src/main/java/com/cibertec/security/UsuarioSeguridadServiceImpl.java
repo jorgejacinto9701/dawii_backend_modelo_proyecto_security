@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.cibertec.entidad.Opcion;
 import com.cibertec.entidad.Rol;
 import com.cibertec.entidad.Usuario;
 import com.cibertec.repository.UsuarioRepository;
@@ -33,8 +34,11 @@ public class UsuarioSeguridadServiceImpl implements UserDetailsService {
 
 				List<Rol> lstRol = usuarioRepository.traerRolesDeUsuario(objUsuario.getIdUsuario());
 				log.info("========|||=========== " + lstRol);
+				
+				List<Opcion> lstOpciones = usuarioRepository.traerEnlacesDeUsuario(objUsuario.getIdUsuario());
+				log.info("========|||=========== " + lstOpciones);
 
-				userDetails = UsuarioPrincipal.build(objUsuario, lstRol);
+				userDetails = UsuarioPrincipal.build(objUsuario, lstRol, lstOpciones);
 			}
 		} catch (IndexOutOfBoundsException e) {
 			throw new UsernameNotFoundException("Wrong username");
